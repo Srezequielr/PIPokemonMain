@@ -46,7 +46,7 @@ export default function Detail(props) {
               </h2>
             </div>
             <hr />
-            <Grid container>
+            <Grid container justifyContent={"center"}>
               <Grid lg={6} md={6} sm={6} xs={6} item>
                 <div className={styles.dataContainer}>
                   <p>Ataque</p>
@@ -83,11 +83,19 @@ export default function Detail(props) {
                   <p>{data.height}</p>
                 </div>
               </Grid>
+              <Grid lg={6} md={6} sm={6} xs={6} item>
+                <p>Id: {data.id}</p>
+              </Grid>
             </Grid>
           </Grid>
           <Grid lg={6} md={6} sm={12} xs={12} item>
             <div className={styles.imageContainer}>
-              <img style={{padding: "10px"}} src={data.img} alt={`imagen de pokemon ${data.name}`} />
+              <img
+                style={{ padding: "10px" }}
+                src={data.img}
+                alt={`imagen de pokemon ${data.name}`}
+                className={styles.img}
+              />
             </div>
           </Grid>
         </Grid>
