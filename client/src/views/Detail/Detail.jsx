@@ -85,9 +85,9 @@ export default function Detail(props) {
               </Grid>
             </Grid>
           </Grid>
-          <Grid md={6} item>
+          <Grid lg={6} md={6} sm={12} xs={12} item>
             <div className={styles.imageContainer}>
-              <img src={data.img} alt={`imagen de pokemon ${data.name}`} />
+              <img style={{padding: "10px"}} src={data.img} alt={`imagen de pokemon ${data.name}`} />
             </div>
           </Grid>
         </Grid>
