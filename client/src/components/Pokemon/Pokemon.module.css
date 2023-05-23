@@ -1,0 +1,40 @@
+.cardContainer {
+  border-radius: 10px;
+  border-color: inherit;
+  border-width: 5px;
+}
+
+.pokeImage {
+  margin: 15px auto;
+  height: auto;
+  width: 100%;
+  max-width: 250px;
+  max-height: 300px;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+.contentContaner {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  border-radius: 10px;
+  border: 5px red solid;
+}
+
+.text {
+  margin: 5px auto;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.imgContainer {
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,52 @@
+.navBar {
+  position: fixed;
+  top: 2%;
+  left: 2.5%;
+  display: flex;
+  padding: 2%;
+  align-items: center;
+  width: 95%;
+  border-radius: 30px;
+}
+
+.space{
+  padding: 60px;
+}
+
+@media screen and (max-width: 900px) {
+  .navBar {
+    position: absolute;
+    width: 101%;
+    border-radius: 0;
+    left: 0;
+    top: 0;
+  }
+  .space{
+    padding: 35px;
+  }
+}
+
+.iconContainer {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+span {
+  font-weight: bold;
+}
+
+.icon {
+  width: 100px;
+  margin-right: 20px;
+}
+
+button{
+    margin-right: 20px;
+}
