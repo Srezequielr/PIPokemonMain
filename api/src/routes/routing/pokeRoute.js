@@ -48,10 +48,10 @@ pokeRoute.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     if (!isNaN(id)) {
-      const infoPokeApi = await getPokeApi(null, id);
+      const infoPokeApi = await getPokeApi(id);
       return res.status(200).send(infoPokeApi);
     } else {
-      const infoMyApi = await getMyApi(null, id);
+      const infoMyApi = await getMyApi(id);
       return res.status(200).send(infoMyApi);
     }
   } catch (error) {
