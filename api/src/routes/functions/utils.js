@@ -41,13 +41,13 @@ const getPokeApi = async (id) => {
     });
     return result;
   } catch (error) {
-    return error.message;
+    throw "Error en getPokeapi", error.message;
   }
 };
 //-----------------------------------------------
 
 //Toma los datos de la base de datos, busca por id solamente
-const getMyApi = async () => {
+const getMyApi = async (id) => {
   try {
     const data = await Pokemon.findAll({
       include: [
@@ -82,7 +82,7 @@ const getMyApi = async () => {
 
     return result;
   } catch (error) {
-    return error.message;
+    return "Error en getMyApi", error.message;
   }
 };
 //-----------------------------------------------

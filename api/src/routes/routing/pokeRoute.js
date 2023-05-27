@@ -16,8 +16,8 @@ pokeRoute.get("/", async (req, res) => {
   try {
     let result = [];
     // Se trae la data de la PokeApi y de la base de datos y se concatena
-    const infoPokeApi = await getPokeApi();
-    const infoMyApi = await getMyApi();
+    const infoPokeApi = await getPokeApi(null);
+    const infoMyApi = await getMyApi(null);
     const concatedResults = infoPokeApi.concat(infoMyApi);
     //-----------------------------------------------
 

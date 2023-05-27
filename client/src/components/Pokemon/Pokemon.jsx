@@ -4,6 +4,7 @@ import styles from "./Pokemon.module.css";
 
 export default function Pokemon({ img, name, types, id }) {
   const theme = useTheme();
+  // console.log(name, img, types, id);
   name = name.charAt(0).toUpperCase() + name.slice(1);
   return (
     <Grid item lg={3} md={4} sm={6} xs={12}>

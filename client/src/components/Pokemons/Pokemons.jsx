@@ -71,6 +71,8 @@ export default function Pokemons(props) {
     return <img src={loader} alt="Loading gif" style={{ width: "250px" }} />;
   }
 
+  console.log(data);
+
   return (
     <div style={{ margin: "40px" }}>
       <InfiniteScroll
