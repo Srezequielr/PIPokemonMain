@@ -1,0 +1,27 @@
+.inputsContainer{
+    width: 95%;
+    margin: auto;
+    padding: 1%;
+    border-radius: 5px;
+    margin-top: 2%;
+}
+
+.searchInput{
+    width: 250px;
+    height: 40px;
+    outline: 0;
+    border-radius: 2px;
+    border: none;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+}
+
+select{
+    border-radius: 3px;
+    width: 150px;
+    border: none;
+    height: 30px;
+}

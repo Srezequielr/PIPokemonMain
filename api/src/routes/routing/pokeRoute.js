@@ -2,24 +2,41 @@ const express = require("express");
 const pokeRoute = express.Router();
 // const axios = require("axios");
 const { Pokemon } = require("../../db");
-const { getPokeApi, searchRepeated, getMyApi } = require("../functions/utils");
+const {
+  getPokeApi,
+  searchRepeated,
+  getMyApi,
+  filterSorting,
+  paginate,
+} = require("../functions/utils");
 
 pokeRoute.get("/", async (req, res) => {
-  const { name, pageNumber } = req.query;
+  const { name, pageNumber, type, sort } = req.query;
+  // console.log(`nombre: ${name} \n tipo: ${type} \n orden: ${sort} \n numero de pagina: ${pageNumber}`);
   try {
-    const infoPokeApi = await getPokeApi(name, null);
-    const infoMyApi = await getMyApi(name, null);
-    if (!infoPokeApi) return res.status(200).send(infoMyApi);
-    if (!infoMyApi) return res.status(200).send(infoPokeApi);
-    const result = infoPokeApi.concat(infoMyApi);
-    if (pageNumber) {
-      const dividedArray = [];
-      for (let i = 0; i < result.length; i += 12) {
-        const chunk = result.slice(i, i + 12);
-        dividedArray.push(chunk);
+    let result = [];
+    // Se trae la data de la PokeApi y de la base de datos y se concatena
+    const infoPokeApi = await getPokeApi();
+    const infoMyApi = await getMyApi();
+    const concatedResults = infoPokeApi.concat(infoMyApi);
+    //-----------------------------------------------
+
+    if (name !== "null" || type !== "null" || sort !== "null") {
+      result = filterSorting(concatedResults, {
+        name,
+        type,
+        sort,
+      });
+    } else {
+      result = concatedResults;
+    }
+    if (result.length > 12 && pageNumber) {
+      result = paginate(result, pageNumber);
+    } else {
+      result = {
+        data: result,
+        totalPages: 1,
       }
-      return res.status(200).send({data: dividedArray[pageNumber - 1],
-      totalPages: dividedArray.length});
     }
     return res.status(200).send(result);
   } catch (error) {

@@ -1,7 +1,8 @@
 const axios = require("axios");
 const { Pokemon, Tipo } = require("../../db");
 
-const getPokeApi = async (name, id) => {
+//Busca todos los pokemons de Pokeapi. No filtra nada
+const getPokeApi = async () => {
   try {
     const infoapiFP = await axios.get("https://pokeapi.co/api/v2/pokemon");
     const infoapiSP = await axios.get(infoapiFP.data.next);
@@ -25,28 +26,24 @@ const getPokeApi = async (name, id) => {
         };
       })
     );
-    if (name) {
-      return infoPokeApi.filter((poke) => poke.name == name)[0];
-    }
-    if (id) {
-      return infoPokeApi.filter((poke) => poke.id == id)[0];
-    } else {
-      const result = infoPokeApi.map((pokemon) => {
-        return {
-          name: pokemon.name,
-          id: pokemon.id,
-          types: pokemon.types,
-          img: pokemon.img,
-        };
-      });
-      return result;
-    }
+
+    const result = infoPokeApi.map((pokemon) => {
+      return {
+        name: pokemon.name,
+        id: pokemon.id,
+        types: pokemon.types,
+        img: pokemon.img,
+      };
+    });
+    return result;
   } catch (error) {
     return error.message;
   }
 };
+//-----------------------------------------------
 
-const getMyApi = async (name, id) => {
+//Toma los datos de la base de datos. No filtra nada
+const getMyApi = async () => {
   try {
     const data = await Pokemon.findAll({
       include: [
@@ -58,32 +55,30 @@ const getMyApi = async (name, id) => {
       ],
     });
     const infoMyApiNT = data.map((data) => data.dataValues);
-    infoMyApi = infoMyApiNT.map((data)=>{
-      return{
-        ...data,
-        types: data.tipos.map(tipo => tipo.name)
-      }
-    });
-    console.log(infoMyApi);
-    if (name) {
-      return infoMyApi.filter((poke) => poke.name == name)[0];
-    }
-    if (id) {
-      return infoMyApi.filter((poke) => poke.id == id)[0];
-    } else {
-      const result = infoMyApi.map((pokemon) => {
-        return {
-          name: pokemon.name,
-          id: pokemon.id,
-          types: pokemon.tipos,
-          img: pokemon.img,
-        };
-      });
-      return result;
-    }
-  } catch (error) {}
-};
 
+    infoMyApi = infoMyApiNT.map((data) => {
+      return {
+        ...data,
+        types: data.tipos.map((tipo) => tipo.name),
+      };
+    });
+
+    const result = infoMyApi.map((pokemon) => {
+      return {
+        name: pokemon.name,
+        id: pokemon.id,
+        types: pokemon.tipos,
+        img: pokemon.img,
+      };
+    });
+    return result;
+  } catch (error) {
+    return error.message;
+  }
+};
+//-----------------------------------------------
+
+//Busca si ya hay un pokemon que se quiere crear en la base de datos
 const searchRepeated = async (name) => {
   try {
     const resultMyApi = await Pokemon.findAll({
@@ -99,7 +94,9 @@ const searchRepeated = async (name) => {
     return error.message;
   }
 };
+//-----------------------------------------------
 
+//Obtiene todos los tipos de pokemon
 const getTypes = async () => {
   try {
     const data = await axios
@@ -115,10 +112,79 @@ const getTypes = async () => {
     return error;
   }
 };
+//-----------------------------------------------
+
+//Filtrado, busqueda y ordenamiento
+const filterSorting = (data, { name, type, sort }) => {
+  if (sort !== "null") {
+    result = sorting(data, sort);
+  }
+  if (name !== "null" && type !== "null") {
+    console.log("Tengo que buscar y filtrar");
+    result = search(data, name);
+    result = filter(result, type);
+  } else if (name !== "null") {
+    console.log("Solo tengo que buscar");
+    result = search(data, name);
+  } else if (type !== "null") {
+    console.log("solo tengo que filtrar");
+    result = filter(data, type);
+  }
+  return result;
+};
+//-----------------------------------------------
+
+//Busqueda por nombre por coincidencia
+const search = (data, name) => {
+  const result = data.filter((pokemon) =>
+    pokemon.name.toUpperCase().includes(name.toUpperCase())
+  );
+  return result;
+};
+//-----------------------------------------------
+
+//Filtrado por tipo
+const filter = (data, pointer) => {
+  const result = data.filter((pokemon) =>
+    pokemon.types.some((type) => type === pointer)
+  );
+  return result;
+};
+//-----------------------------------------------
+
+//Ordenado X poder y alfabeto
+const sorting = (data, pointer) => {
+  let result = data.sort((a, b) => {
+    if (a.name > b.name) return 1;
+    if (a.name < b.name) return -1;
+    return 0;
+  });
+  if (pointer === "maxMin" || pointer === "ZA") {
+    result = result.reverse();
+  }
+  return result;
+};
+//-----------------------------------------------
+
+//Paginado
+const paginate = (data, pageNumber) => {
+  const dividedArray = [];
+  for (let i = 0; i < data.length; i += 12) {
+    const chunk = data.slice(i, i + 12);
+    dividedArray.push(chunk);
+  }
+  return {
+    data: dividedArray[pageNumber - 1],
+    totalPages: dividedArray.length,
+  };
+};
+//-----------------------------------------------
 
 module.exports = {
   getPokeApi,
   getMyApi,
   searchRepeated,
   getTypes,
+  filterSorting,
+  paginate,
 };

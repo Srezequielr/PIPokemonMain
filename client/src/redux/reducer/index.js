@@ -3,7 +3,7 @@ import {
   GET_ALL_POKEMONS,
   GET_POKEDETAILS,
   GET_TYPES,
-  SEARCH_POKEMON,
+  CLEAN_POKEMONS,
 } from "../actions/types";
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_POKEMONS:
-      console.log("data que me llega", action.payload.data.data, "data que tengo almacenada", state.pokemons.data);
+      // console.log(`data que me llega: ${action.payload.data.data} \n data que tengo almacenada: ${state.pokemons.data}`);
       if (action.payload.error) {
         return {
           ...state,
@@ -30,7 +30,7 @@ const rootReducer = (state = initialState, action) => {
         pokemons: {
           error: false,
           data: state.pokemons.data.concat(action.payload.data.data),
-          totalPages: action.payload.data.totalPages
+          totalPages: action.payload.data.totalPages,
         },
       };
     case GET_POKEDETAILS:
@@ -46,10 +46,17 @@ const rootReducer = (state = initialState, action) => {
       };
     case GET_TYPES:
       return { ...state, types: action.payload };
-    case SEARCH_POKEMON:
-      return { ...state, pokemons: action.payload };
     case CLEAN_DETAIL:
       return { ...state, pokeDetail: {} };
+    case CLEAN_POKEMONS:
+      return {
+        ...state,
+        pokemons: {
+          error: false,
+          data: [],
+          totalPages: 0,
+        },
+      };
     default:
       return { ...state };
   }

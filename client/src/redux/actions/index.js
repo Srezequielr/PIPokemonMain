@@ -4,15 +4,17 @@ import {
   GET_ALL_POKEMONS,
   GET_POKEDETAILS,
   GET_TYPES,
-  SEARCH_POKEMON,
+  CLEAN_POKEMONS,
 } from "./types";
 
-export const getAllPokemons = (pageNumber) => {
+export const getAllPokemons = (pageNumber, inputs) => {
+  console.log("me estan ejecutando");
   return async function (dispatch) {
     try {
       const data = await axios
-        .get(`/pokemons?pageNumber=${pageNumber}`)
+        .get(`/pokemons?pageNumber=${pageNumber}&name=${inputs.search}&sort=${inputs.sort}&type=${inputs.type}`)
         .then((response) => response.data);
+        // console.log(data);
       dispatch({
         type: GET_ALL_POKEMONS,
         payload: { data: data, error: false },
@@ -56,20 +58,9 @@ export const getTypes = () => {
   };
 };
 
-export const searchPokemon = (name) => {
-  return async function (dispatch) {
-    try {
-      let data = await axios
-        .get(`/pokemons?name=${name}`)
-        .then((response) => [response.data]);
-      if (!data[0].name) data = false;
-      console.log("reducer", data.length);
-      dispatch({ type: SEARCH_POKEMON, payload: data });
-    } catch (error) {
-      console.error("Error in action getPokemonByName", error.message);
-    }
-  };
-};
+export const cleanPokemons =() =>{
+  return {type: CLEAN_POKEMONS}
+}
 
 export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
