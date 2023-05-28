@@ -15,7 +15,7 @@ export default function Home(props) {
       <Landing />
       <hr />
       <SearchInputs />
-      <Pokemons key={`${searchValue} ${typeValue} ${sortValue}`} />
+      <Pokemons searchValue={searchValue} typeValue={typeValue} sortValue={sortValue} />
     </div>
   );
 }

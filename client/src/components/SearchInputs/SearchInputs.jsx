@@ -119,7 +119,7 @@ export default function SearchInputs(props) {
     } else {
       navigate(`?search=${search}`);
     }
-    // dispatch(cleanPokemons());
+    dispatch(cleanPokemons());
   };
   ////-------------------------------
 

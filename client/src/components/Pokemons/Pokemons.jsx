@@ -8,15 +8,15 @@ import { Grid } from "@mui/material";
 import loader from "./../../images/loadingGif.gif";
 import errorImage from "./../../images/errorImage.png";
 
-export default function Pokemons(props) {
+export default function Pokemons({ searchValue, typeValue, sortValue }) {
   const location = useLocation();
   const dispatch = useDispatch();
 
   //Obtencion de querys de la url
-  const query = new URLSearchParams(location.search);
-  const searchValue = query.get("search");
-  const typeValue = query.get("type");
-  const sortValue = query.get("sort");
+  // const query = new URLSearchParams(location.search);
+  // const searchValue = query.get("search");
+  // const typeValue = query.get("type");
+  // const sortValue = query.get("sort");
   ////-------------------------------
 
   //Estados del scroll infinito
@@ -47,9 +47,9 @@ export default function Pokemons(props) {
   const totalPagesRef = useRef(totalPages);
   useEffect(() => {
     totalPagesRef.current = totalPages;
-    console.log(`Paginas totales: ${totalPagesRef.current} \n
-    Pagina actual: ${page} \n
-    Relacion Booleana entre ellas: ${totalPages > page} `);
+    // console.log(`Paginas totales: ${totalPagesRef.current} \n
+    // Pagina actual: ${page} \n
+    // Relacion Booleana entre ellas: ${totalPages > page} `);
     setHasMore(totalPages > page);
   }, [totalPages, page]);
   ////-------------------------------
@@ -67,11 +67,22 @@ export default function Pokemons(props) {
     );
   }
 
+  if (data[0] === null) {
+    return (
+      <div>
+        <h2>No se encontraron pokemons</h2>
+        <img
+          style={{ width: "300px" }}
+          src={errorImage}
+          alt="error al cargar los pokemons"
+        />
+      </div>
+    );
+  }
+
   if (!data[0]) {
     return <img src={loader} alt="Loading gif" style={{ width: "250px" }} />;
   }
-
-  console.log(data);
 
   return (
     <div style={{ margin: "40px" }}>

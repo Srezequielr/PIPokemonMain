@@ -8,13 +8,14 @@ import {
 } from "./types";
 
 export const getAllPokemons = (pageNumber, inputs) => {
-  console.log("me estan ejecutando");
   return async function (dispatch) {
     try {
       const data = await axios
         .get(`/pokemons?pageNumber=${pageNumber}&name=${inputs.search}&sort=${inputs.sort}&type=${inputs.type}`)
         .then((response) => response.data);
-        // console.log(data);
+        if(data.data.length === 0){
+          data.data = null
+        }
       dispatch({
         type: GET_ALL_POKEMONS,
         payload: { data: data, error: false },
