@@ -9,7 +9,21 @@
   border-radius: 30px;
 }
 
-.space{
+.buttonsmall {
+  border: none;
+  background-color: red;
+  font-size: medium;
+  transition: 0.5s;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.buttonsmall:hover {
+  transition: 0.5s;
+  background-color: rgb(203, 0, 0);
+}
+
+.space {
   padding: 60px;
 }
 
@@ -21,7 +35,7 @@
     left: 0;
     top: 0;
   }
-  .space{
+  .space {
     padding: 35px;
   }
 }
@@ -47,6 +61,6 @@ span {
   margin-right: 20px;
 }
 
-button{
-    margin-right: 20px;
+button {
+  margin-right: 20px;
 }

@@ -34,14 +34,14 @@ export default function Navbar({ currentLocation }) {
           <Hidden mdDown>
             {currentLocation !== "/" && (
               <Link href="/">
-                <button>Inicio</button>
+                <button className={styles.buttonsmall}>Inicio</button>
               </Link>
             )}
             <Link href="/create_pokemon">
-              <button>Crear Pokemon</button>
+              <button className={styles.buttonsmall}>Crear Pokemon</button>
             </Link>
             <Link href="/my_pokemons">
-              <button>Mis pokemons</button>
+              <button className={styles.buttonsmall}>Mis pokemons</button>
             </Link>
           </Hidden>
           <Hidden mdUp>
