@@ -33,21 +33,21 @@ export default function Navbar({ currentLocation }) {
         <div className={styles.buttonsContainer}>
           <Hidden mdDown>
             {currentLocation !== "/" && (
-              <Link href="/">
+              <Link sx={{ marginRight: "20px" }} href="/">
                 <button className={styles.buttonsmall}>Inicio</button>
               </Link>
             )}
-            <Link href="/create_pokemon">
+            <Link sx={{ marginRight: "20px" }} href="/create_pokemon">
               <button className={styles.buttonsmall}>Crear Pokemon</button>
             </Link>
-            <Link href="/my_pokemons">
+            <Link sx={{ marginRight: "20px" }} href="/my_pokemons">
               <button className={styles.buttonsmall}>Mis pokemons</button>
             </Link>
           </Hidden>
           <Hidden mdUp>
             {currentLocation !== "/" && (
-              <Link href="/">
-                <button>Inicio</button>
+              <Link sx={{ marginRight: "20px" }} href="/">
+                <button className={styles.buttonsmall}>Inicio</button>
               </Link>
             )}
             <IconButton

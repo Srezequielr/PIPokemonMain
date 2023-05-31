@@ -5,17 +5,23 @@ import {
   GET_POKEDETAILS,
   GET_TYPES,
   CLEAN_POKEMONS,
+  POST_DATA_REQ,
+  POST_DATA_SUCC,
+  POST_DATA_FAIL,
 } from "./types";
 
+//Obtener los todos los pokemons tambien busca, filtra y ordena
 export const getAllPokemons = (pageNumber, inputs) => {
   return async function (dispatch) {
     try {
       const data = await axios
-        .get(`/pokemons?pageNumber=${pageNumber}&name=${inputs.search}&sort=${inputs.sort}&type=${inputs.type}`)
+        .get(
+          `/pokemons?pageNumber=${pageNumber}&name=${inputs.search}&sort=${inputs.sort}&type=${inputs.type}`
+        )
         .then((response) => response.data);
-        if(data.data.length === 0){
-          data.data = null
-        }
+      if (data.data.length === 0) {
+        data.data = null;
+      }
       dispatch({
         type: GET_ALL_POKEMONS,
         payload: { data: data, error: false },
@@ -28,7 +34,15 @@ export const getAllPokemons = (pageNumber, inputs) => {
     }
   };
 };
+//----------------------------------
 
+//Limpia los pokemons existentes al realizar una busqueda, filtrado u ordenamiento
+export const cleanPokemons = () => {
+  return { type: CLEAN_POKEMONS };
+};
+//----------------------------------
+
+//Obtiene los detalles de un pokemon
 export const getPokeDetail = (id) => {
   return async function (dispatch) {
     try {
@@ -47,7 +61,28 @@ export const getPokeDetail = (id) => {
     }
   };
 };
+//----------------------------------
 
+//Limpia los detalles del pokemon al desmontarse el componente
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL };
+};
+//----------------------------------
+
+export const postPolkemon = (data) => {
+  return async function (dispatch) {
+    dispatch({ type: POST_DATA_REQ });
+    axios
+      .post("/pokemons", data)
+      .then((response) => dispatch({ type: POST_DATA_SUCC }));
+    try {
+    } catch (error) {
+      dispatch({ type: POST_DATA_FAIL });
+    }
+  };
+};
+
+//Obtiene los tipos de pokemon
 export const getTypes = () => {
   return async function (dispatch) {
     try {
@@ -58,11 +93,4 @@ export const getTypes = () => {
     }
   };
 };
-
-export const cleanPokemons =() =>{
-  return {type: CLEAN_POKEMONS}
-}
-
-export const cleanDetail = () => {
-  return { type: CLEAN_DETAIL };
-};
+//----------------------------------

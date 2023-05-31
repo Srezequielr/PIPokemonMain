@@ -50,7 +50,7 @@ export default function SearchInputs(props) {
   }, [dispatch, searchValue, typeValue, sortValue]);
   ////-------------------------------
 
-  //contoller del input de busqueda 
+  //contoller del input de busqueda
   const searchHandler = (event) => {
     const input = event.target.value;
     setSearch(input);
@@ -135,8 +135,7 @@ export default function SearchInputs(props) {
           sm={6}
           xs={12}
           item
-          justifyContent={"center"}
-          alignItems={"center"}
+          flexDirection={"row"}
         >
           <label>
             <IconButton size="large" color="inherit" onClick={searchSubmit}>

@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const { Tipo } = require("./db");
+const { Type } = require("./db");
 const { getTypes } = require("./routes/functions/utils.js");
 // const axios = require("axios");
 
@@ -28,11 +28,10 @@ server.use((req, res, next) => {
   next();
 });
 server.use("/", async (req, res, next) => {
-  const types = await Tipo.findAll();
+  const types = await Type.findAll();
   if (types.length === 0) {
-    console.log("No tengo tipos, los cargo");
     const dataUpdate = await getTypes();
-    const typesMyApi = await Tipo.bulkCreate(dataUpdate);
+    const typesMyApi = await Type.bulkCreate(dataUpdate);
   }
   next();
 });

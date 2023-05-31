@@ -36,7 +36,7 @@ pokeRoute.get("/", async (req, res) => {
       result = {
         data: result,
         totalPages: 1,
-      }
+      };
     }
     return res.status(200).send(result);
   } catch (error) {
@@ -61,7 +61,7 @@ pokeRoute.get("/:id", async (req, res) => {
 
 pokeRoute.post("/", async (req, res) => {
   const { name, hp, attack, defense, speed, weight, height, types } = req.body;
-  console.log("nombre", name);
+  console.log(req.body);
   let { img } = req.body;
   if (!img)
     img =
@@ -91,7 +91,7 @@ pokeRoute.post("/", async (req, res) => {
       img: img,
     });
     if (!types.length) types = [1];
-    await pokemon.setTipos(types);
+    await pokemon.setTypes(types);
     return res.status(201).json(pokemon);
   } catch (error) {
     res.status(400).send(error.message);

@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Pokemon, Tipo } = require("../../db");
+const { Pokemon, Type } = require("../../db");
 
 //Busca todos los pokemons de Pokeapi, busca por id solamente
 const getPokeApi = async (id) => {
@@ -41,7 +41,7 @@ const getPokeApi = async (id) => {
     });
     return result;
   } catch (error) {
-    throw "Error en getPokeapi", error.message;
+    throw ("Error en getPokeapi", error.message);
   }
 };
 //-----------------------------------------------
@@ -52,7 +52,7 @@ const getMyApi = async (id) => {
     const data = await Pokemon.findAll({
       include: [
         {
-          model: Tipo,
+          model: Type,
           attributes: ["name"],
           through: { attributes: [] },
         },
@@ -63,9 +63,10 @@ const getMyApi = async (id) => {
     let infoMyApi = infoMyApiNT.map((data) => {
       return {
         ...data,
-        types: data.tipos.map((tipo) => tipo.name),
+        types: data.types.map((tipo) => tipo.name),
       };
     });
+    console.log(infoMyApi);
 
     if (id) {
       return infoMyApi.filter((poke) => poke.id == id)[0];
@@ -75,7 +76,7 @@ const getMyApi = async (id) => {
       return {
         name: pokemon.name,
         id: pokemon.id,
-        types: pokemon.tipos,
+        types: pokemon.types,
         img: pokemon.img,
       };
     });

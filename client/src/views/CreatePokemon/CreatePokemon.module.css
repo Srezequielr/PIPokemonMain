@@ -1,0 +1,73 @@
+.createContainer {
+  margin: 20px auto;
+  width: 95%;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.createImage {
+  width: 80%;
+  /* object-fit: cover; */
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+input {
+  /* display: block; */
+  margin: auto;
+  text-align: center;
+  width: 200px;
+  height: 25px;
+}
+.createButton {
+  border: none;
+  background-color: aliceblue;
+  font-size: medium;
+  transition: 0.5s;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.createButton:hover {
+  transition: 0.5s;
+  background-color: rgb(170, 175, 180);
+}
+
+@media screen and (max-width: 900px) {
+  input {
+    width: 80%;
+  }
+  select {
+    width: 100px;
+  }
+}
+
+.typesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.type {
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 10px;
+  margin: auto;
+  width: 80%;
+}

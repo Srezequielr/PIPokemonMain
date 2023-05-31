@@ -1,10 +1,10 @@
 const express = require("express");
 const typesRoute = express.Router();
-const { Tipo } = require("../../db");
+const { Type } = require("../../db");
 
 typesRoute.get("/", async (req, res) => {
   try {
-    const data = await Tipo.findAll();
+    const data = await Type.findAll();
     const types = data.map((data) => data.dataValues);
     res.status(200).send(types);
   } catch (error) {

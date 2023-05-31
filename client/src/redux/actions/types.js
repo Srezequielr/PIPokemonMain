@@ -3,3 +3,6 @@ export const GET_POKEDETAILS = "GET_POKEDETAILS";
 export const GET_TYPES = "GET_TYPES";
 export const CLEAN_POKEMONS = "CLEAN_POKEMONS";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const POST_DATA_REQ = "POST_DATA_REQ";
+export const POST_DATA_SUCC = "POST_DATA_SUCC";
+export const POST_DATA_FAIL = "POST_DATA_FAIL";
