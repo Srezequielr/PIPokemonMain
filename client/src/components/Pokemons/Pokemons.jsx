@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPokemons } from "../../redux/actions";
-import { useLocation } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Pokemon from "../Pokemon/Pokemon";
 import { Grid } from "@mui/material";
@@ -9,7 +8,6 @@ import loader from "./../../images/loadingGif.gif";
 import errorImage from "./../../images/errorImage.png";
 
 export default function Pokemons({ searchValue, typeValue, sortValue }) {
-  const location = useLocation();
   const dispatch = useDispatch();
 
   //Obtencion de querys de la url

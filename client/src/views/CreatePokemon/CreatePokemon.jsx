@@ -61,8 +61,51 @@ export default function CreatePokemon() {
   //Envio del formulario
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(postPolkemon(form));
+    if (!form.name) {
+      alert("Debe Insertar un nombre");
+    } else if (
+      !form.attack ||
+      !form.defense ||
+      !form.height ||
+      !form.hp ||
+      !form.weight ||
+      !form.speed
+    ) {
+      alert("Falta alguna estadistica");
+    } else if (form.types.length === 0) {
+      alert("Debe insertar al menos un tipo");
+    } else {
+      dispatch(postPolkemon(form));
+      alert("Pokemon creado correctamente");
+    }
   };
+  //----------------------------------
+
+  //Dispara una alerta si el usuario cargo algun dato
+  useEffect(() => {
+    if (
+      form.name ||
+      form.attack ||
+      form.defense ||
+      form.height ||
+      form.hp ||
+      form.speed ||
+      form.weight ||
+      form.types.length > 0
+    ) {
+      const handleBeforeUnload = (event) => {
+        event.preventDefault();
+        event.returnValue = ""; // Chrome necesita que se establezca el valor de returnValue
+      };
+
+      window.onbeforeunload = handleBeforeUnload;
+
+      return () => {
+        window.onbeforeunload = null; // Limpiar la función antes de desmontar el componente
+      };
+    }
+  }, [form]);
+  //----------------------------------
 
   return (
     <div
@@ -171,8 +214,8 @@ export default function CreatePokemon() {
                 className={styles.inputsContainer}
                 style={{ flexDirection: "row", justifyContent: "space-around" }}
               >
-                <Grid container alignItems={"center"}>
-                  <Grid item lg={6} md={6} sm={6} xs={6}>
+                <Grid container alignItems={"center"} spacing={1}>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
                     <div>
                       <label>Tipos</label>
                       <select
@@ -197,8 +240,8 @@ export default function CreatePokemon() {
                     item
                     lg={6}
                     md={6}
-                    sm={6}
-                    xs={6}
+                    sm={12}
+                    xs={12}
                     alignItems={"center"}
                     justifyContent={"center"}
                   >
