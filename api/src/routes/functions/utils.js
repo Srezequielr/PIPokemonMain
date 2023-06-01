@@ -66,7 +66,6 @@ const getMyApi = async (id) => {
         types: data.types.map((tipo) => tipo.name),
       };
     });
-    console.log(infoMyApi);
 
     if (id) {
       return infoMyApi.filter((poke) => poke.id == id)[0];

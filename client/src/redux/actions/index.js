@@ -8,6 +8,7 @@ import {
   POST_DATA_REQ,
   POST_DATA_SUCC,
   POST_DATA_FAIL,
+  GET_MY_POKEMONS,
 } from "./types";
 
 //Obtener los todos los pokemons tambien busca, filtra y ordena
@@ -42,6 +43,30 @@ export const cleanPokemons = () => {
 };
 //----------------------------------
 
+//Obtiene los pokemons del usuario
+export const getMyPokemons = () => {
+  return async function (dispatch) {
+    try {
+      const data = await axios
+        .get(`/pokemons/my`)
+        .then((response) => response.data);
+      if (data.length === 0) {
+        data.data = null;
+      }
+      dispatch({
+        type: GET_MY_POKEMONS,
+        payload: { data: data, error: false },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_MY_POKEMONS,
+        payload: { error: true, data: "No se pudieron Obtener tus Pokemons" },
+      });
+    }
+  };
+};
+//----------------------------------
+
 //Obtiene los detalles de un pokemon
 export const getPokeDetail = (id) => {
   return async function (dispatch) {
@@ -69,6 +94,7 @@ export const cleanDetail = () => {
 };
 //----------------------------------
 
+//Postea un Pokemon
 export const postPolkemon = (data) => {
   return async function (dispatch) {
     dispatch({ type: POST_DATA_REQ });
@@ -81,6 +107,7 @@ export const postPolkemon = (data) => {
     }
   };
 };
+//----------------------------------
 
 //Obtiene los tipos de pokemon
 export const getTypes = () => {

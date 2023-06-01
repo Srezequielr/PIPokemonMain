@@ -44,6 +44,15 @@ pokeRoute.get("/", async (req, res) => {
   }
 });
 
+pokeRoute.get("/my", async (req, res) => {
+  try {
+    const infoMyApi = await getMyApi();
+    return res.status(200).send(infoMyApi);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 pokeRoute.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {

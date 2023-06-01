@@ -5,6 +5,7 @@ import Home from "./views/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Detail from "./views/Detail/Detail";
 import CreatePokemon from "./views/CreatePokemon/CreatePokemon";
+import MyPokemons from "./views/MyPokemons/MyPokemons";
 // import { Route, Switch } from "react-router-dom";
 
 const themeLight = createTheme({
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="" element={<Home />} />
           <Route path="pokemon/:id" element={<Detail />} />
           <Route path="create_pokemon" element={<CreatePokemon />} />
+          <Route path="my_pokemons" element={<MyPokemons />} />
         </Routes>
       </ThemeProvider>
     </div>

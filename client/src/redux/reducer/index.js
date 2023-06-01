@@ -4,10 +4,12 @@ import {
   GET_POKEDETAILS,
   GET_TYPES,
   CLEAN_POKEMONS,
+  GET_MY_POKEMONS,
 } from "../actions/types";
 
 const initialState = {
   pokemons: { error: false, data: [], totalPages: 0 },
+  myPokemons: { error: false, data: [] },
   pokeDetail: { error: false, data: {} },
   types: [],
 };
@@ -15,7 +17,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_POKEMONS:
-      // console.log(`data que me llega: ${action.payload.data.data} \n data que tengo almacenada: ${state.pokemons.data}`);
       if (action.payload.error) {
         return {
           ...state,
@@ -31,6 +32,23 @@ const rootReducer = (state = initialState, action) => {
           error: false,
           data: state.pokemons.data.concat(action.payload.data.data),
           totalPages: action.payload.data.totalPages,
+        },
+      };
+    case GET_MY_POKEMONS:
+      if (action.payload.error) {
+        return {
+          ...state,
+          myPokemons: {
+            error: true,
+            data: action.payload.data,
+          },
+        };
+      }
+      return {
+        ...state,
+        myPokemons: {
+          error: false,
+          data: action.payload.data,
         },
       };
     case GET_POKEDETAILS:
