@@ -4,7 +4,7 @@
 
 ## Presentacion 🗣️
 
-Este es mi proyecto individual de Henry donde tuve que desarrollar un SPA en el que gestioné datos de una API (Pokeapi) y de una base de datos PostgreSQL para poder cargar Propios.
+Este es mi proyecto individual de Henry donde tuve que desarrollar un SPA en el que gestioné datos de una API (Pokeapi) y de una base de datos PostgreSQL para poder cargar sus propios Pokemons.
 
 ## Historia 📚
 
