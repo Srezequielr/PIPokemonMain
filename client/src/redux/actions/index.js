@@ -9,6 +9,7 @@ import {
   POST_DATA_SUCC,
   POST_DATA_FAIL,
   GET_MY_POKEMONS,
+  DELETE_POKEMON,
 } from "./types";
 
 //Obtener los todos los pokemons tambien busca, filtra y ordena
@@ -104,6 +105,21 @@ export const postPolkemon = (data) => {
     try {
     } catch (error) {
       dispatch({ type: POST_DATA_FAIL });
+    }
+  };
+};
+//----------------------------------
+
+//Borrar un pokemon
+export const deletePokemon = (id) => {
+  return async function (dispatch) {
+    try {
+      axios.delete(`/pokemons/${id}`).then((response) => {
+        alert("Pokemon borrado correctamente");
+      });
+      dispatch({ type: DELETE_POKEMON });
+    } catch (error) {
+      alert("Ocurrio un error");
     }
   };
 };

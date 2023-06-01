@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getPokeDetail } from "../../redux/actions";
+import { useNavigate, useParams } from "react-router-dom";
+import { deletePokemon, getPokeDetail } from "../../redux/actions";
 import loader from "./../../images/loadingGif.gif";
 import errorImage from "./../../images/errorImage.png";
 import { Grid, useTheme } from "@mui/material";
@@ -11,6 +11,7 @@ export default function Detail() {
   const { id } = useParams();
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //Traigo y fragmento la informacion del pokemon
   const pokemon = useSelector((state) => state.pokeDetail);
@@ -21,9 +22,11 @@ export default function Detail() {
   //----------------------------------
 
   //Borra un pokemon
-  const deletePokemon = (event) => {
-    event.preventDefault();
+  const deleteHandler = () => {
+    dispatch(deletePokemon(data.id));
+    navigate("/");
   };
+  //----------------------------------
 
   if (error) {
     return (
@@ -37,8 +40,6 @@ export default function Detail() {
       </div>
     );
   }
-
-  console.log(data);
 
   if (data.hasOwnProperty("id")) {
     return (
@@ -151,7 +152,7 @@ export default function Detail() {
                   alignItems={"center"}
                   justify={"center"}
                 >
-                  <button onClick={deletePokemon} className={styles.button}>
+                  <button onClick={deleteHandler} className={styles.button}>
                     Borrar Pokemon
                   </button>
                 </Grid>
