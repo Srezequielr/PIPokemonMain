@@ -14,6 +14,8 @@ export default function MyPokemons() {
     dispatch(getMyPokemons());
   }, [dispatch]);
 
+  console.log("Data de mis pokemons", data);
+
   if (error) {
     return (
       <div>
@@ -30,7 +32,7 @@ export default function MyPokemons() {
   if (data[0] === null) {
     return (
       <div>
-        <h2>No se encontraron pokemons</h2>
+        <h2>No tienes pokemons creados</h2>
         <img
           style={{ width: "300px" }}
           src={errorImage}

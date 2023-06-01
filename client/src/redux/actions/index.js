@@ -47,11 +47,11 @@ export const cleanPokemons = () => {
 export const getMyPokemons = () => {
   return async function (dispatch) {
     try {
-      const data = await axios
+      let data = await axios
         .get(`/pokemons/my`)
         .then((response) => response.data);
       if (data.length === 0) {
-        data.data = null;
+        data = [null];
       }
       dispatch({
         type: GET_MY_POKEMONS,
