@@ -1,6 +1,5 @@
 const express = require("express");
 const pokeRoute = express.Router();
-// const axios = require("axios");
 const { Pokemon } = require("../../db");
 const {
   getPokeApi,
@@ -102,6 +101,25 @@ pokeRoute.post("/", async (req, res) => {
     if (!types.length) types = [1];
     await pokemon.setTypes(types);
     return res.status(201).json(pokemon);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+pokeRoute.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await Pokemon.update(
+      {
+        deletedAt: new Date(),
+      },
+      {
+        where: {
+          id: id, //y la asignamos
+        },
+      }
+    );
+    res.status(200).send("Pokemon borrado correctamente");
   } catch (error) {
     res.status(400).send(error.message);
   }

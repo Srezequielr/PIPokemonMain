@@ -7,17 +7,23 @@ import errorImage from "./../../images/errorImage.png";
 import { Grid, useTheme } from "@mui/material";
 import styles from "./Detail.module.css";
 
-export default function Detail(props) {
+export default function Detail() {
   const { id } = useParams();
+  const theme = useTheme();
   const dispatch = useDispatch();
+
+  //Traigo y fragmento la informacion del pokemon
   const pokemon = useSelector((state) => state.pokeDetail);
   const { error, data } = pokemon;
-  const theme = useTheme();
   useEffect(() => {
     dispatch(getPokeDetail(id));
   }, [dispatch, id]);
+  //----------------------------------
 
-  console.log(pokemon);
+  //Borra un pokemon
+  const deletePokemon = (event) => {
+    event.preventDefault();
+  };
 
   if (error) {
     return (
@@ -31,6 +37,8 @@ export default function Detail(props) {
       </div>
     );
   }
+
+  console.log(data);
 
   if (data.hasOwnProperty("id")) {
     return (
@@ -83,9 +91,71 @@ export default function Detail(props) {
                   <p>{data.height}</p>
                 </div>
               </Grid>
-              <Grid lg={6} md={6} sm={6} xs={6} item>
+              <Grid lg={12} md={12} sm={12} xs={12} item>
+                <div className={styles.typesContainer}>
+                  <Grid container alignItems={"center"}>
+                    <Grid item lg={6} md={6} sm={6} xs={6}>
+                      <p style={{ fontWeight: "bold" }}>Tipos</p>
+                    </Grid>
+                    <Grid
+                      item
+                      lg={6}
+                      md={6}
+                      sm={6}
+                      xs={6}
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                    >
+                      <Grid
+                        container
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                      >
+                        {data.types.map((type, index) => (
+                          <Grid
+                            item
+                            lg={6}
+                            md={6}
+                            sm={6}
+                            xs={6}
+                            justifyContent={"center"}
+                            key={index}
+                          >
+                            <span>{type}</span>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </div>
+              </Grid>
+              <Grid
+                lg={6}
+                md={6}
+                sm={6}
+                xs={6}
+                item
+                alignItems={"center"}
+                justifyContent={"center"}
+              >
                 <p>Id: {data.id}</p>
               </Grid>
+              {isNaN(data.id) && (
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                  container
+                  alignItems={"center"}
+                  justify={"center"}
+                >
+                  <button onClick={deletePokemon} className={styles.button}>
+                    Borrar Pokemon
+                  </button>
+                </Grid>
+              )}
             </Grid>
           </Grid>
           <Grid lg={6} md={6} sm={12} xs={12} item>

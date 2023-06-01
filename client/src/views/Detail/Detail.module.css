@@ -22,16 +22,40 @@
   font-weight: bold;
 }
 
-.imageContainer{
-    background-color: aliceblue;
-    border-radius: 5px;
-    margin: auto 5%;
-    height: 100%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.imageContainer {
+  background-color: aliceblue;
+  border-radius: 5px;
+  margin: auto 5%;
+  max-height: 90%;
+  height: 90%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-.img{
-  max-width: 100%;
+.img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.typesContainer {
+  background-color: aliceblue;
+  margin: auto;
+  width: 93%;
+  border-radius: 5px;
+}
+
+.button {
+  display: block;
+  margin: auto;
+  border: none;
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: medium;
+  transition: 0.5s;
+}
+.button:hover {
+  transition: 0.5s;
+  background-color: rgb(170, 175, 180);
 }
