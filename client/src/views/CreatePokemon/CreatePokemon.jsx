@@ -77,6 +77,16 @@ export default function CreatePokemon() {
     } else {
       dispatch(postPolkemon(form));
       alert("Pokemon creado correctamente");
+      setForm({
+        name: "",
+        hp: "",
+        attack: "",
+        defense: "",
+        speed: "",
+        weight: "",
+        height: "",
+        types: [],
+      });
     }
   };
   //----------------------------------
