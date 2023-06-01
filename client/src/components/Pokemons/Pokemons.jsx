@@ -10,13 +10,6 @@ import errorImage from "./../../images/errorImage.png";
 export default function Pokemons({ searchValue, typeValue, sortValue }) {
   const dispatch = useDispatch();
 
-  //Obtencion de querys de la url
-  // const query = new URLSearchParams(location.search);
-  // const searchValue = query.get("search");
-  // const typeValue = query.get("type");
-  // const sortValue = query.get("sort");
-  ////-------------------------------
-
   //Estados del scroll infinito
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -27,17 +20,13 @@ export default function Pokemons({ searchValue, typeValue, sortValue }) {
   const { data, error, totalPages } = pokemons;
   const isMounted = useRef(false);
   useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-    } else {
-      dispatch(
-        getAllPokemons(page, {
-          search: searchValue,
-          type: typeValue,
-          sort: sortValue,
-        })
-      );
-    }
+    dispatch(
+      getAllPokemons(page, {
+        search: searchValue,
+        type: typeValue,
+        sort: sortValue,
+      })
+    );
   }, [page, dispatch, searchValue, typeValue, sortValue]);
   ////-------------------------------
 
@@ -45,9 +34,6 @@ export default function Pokemons({ searchValue, typeValue, sortValue }) {
   const totalPagesRef = useRef(totalPages);
   useEffect(() => {
     totalPagesRef.current = totalPages;
-    // console.log(`Paginas totales: ${totalPagesRef.current} \n
-    // Pagina actual: ${page} \n
-    // Relacion Booleana entre ellas: ${totalPages > page} `);
     setHasMore(totalPages > page);
   }, [totalPages, page]);
   ////-------------------------------
