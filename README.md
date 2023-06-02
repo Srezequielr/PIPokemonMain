@@ -43,15 +43,21 @@ Si por al algun motivo quiere desplegar la aplicacion de forma local es necesari
 - Para hacer funcionar la API
   - La base de datos esta desplegada en postgreSQL, hay que crear una db en la consola con el nombre pokemon
   - Crear un archivo con el nombre .env donde se guardaran las variables de entorno
-    Los nombres son los siguientes;
+    Los nombres son los siguientes:
+    
+    ```
     DB_USER: {Nombre de usuario}
     DB_PASSWORD: {contraseña}
     DB_HOST: localhost
     DB_NAME: pokemon
+    ```
   - en la consola de la carpeta Api despues de haber instalado las dependencias ejecutar el comando npm start
 - Para hacer funcionar el Cliente  
   - Agregar un archivo .env.local dentro de la carpeta Client con lo siguiente:
+  
+    ```
     REACT_APP_URL_API=http://localhost:3001
+    ```
   - Despues de haber instalado las dependencias ejecutar el comando npm start  
 
 #### Tecnologías Utilizadas
