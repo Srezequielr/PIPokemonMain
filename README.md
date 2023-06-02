@@ -10,9 +10,9 @@ Este es mi proyecto individual de Henry donde tuve que desarrollar un SPA en el 
 
 Este proyecto fue asignado en diciembre de 2022. En esa primera instancia, no tuve lo suficiente para aprobar el proyecto. Sin embargo, en mayo de 2023, retomé esa antigua carpeta y en tan solo una semana logré alcanzar y superar ampliamente los requisitos mínimos de aquel entonces.
 
-## Caracteristicas
+# Caracteristicas
 
-#Front end:
+## Front end:
 - Diseño responsive
 - Scroll infinito
 - Colores acordes con la tematica
@@ -21,7 +21,7 @@ Este proyecto fue asignado en diciembre de 2022. En esa primera instancia, no tu
 - Atencion al manejo de errores
 - Busqueda por querys
 
-#Back end:
+## Back end:
 - Filtrado 
 - Ordenamiento
 - Busqueda 
@@ -30,11 +30,21 @@ Este proyecto fue asignado en diciembre de 2022. En esa primera instancia, no tu
 - Relaciones
 - Creacion de datos
 
-## Deploy
+# Deploy
 
 https://pi-pokemon-main-pi.vercel.app/
 
-## Notas 🗒️
+# Tecnologías Utilizadas
+
+- [ ] React
+- [ ] Redux
+- [ ] Express
+- [ ] Sequelize - Postgres
+- [ ] Material UI
+- [ ] Styled Components
+- [ ] Axios
+
+# Notas 🗒️
 
 Si por al algun motivo quiere desplegar la aplicacion de forma local es necesario:
 
@@ -59,13 +69,3 @@ Si por al algun motivo quiere desplegar la aplicacion de forma local es necesari
     REACT_APP_URL_API=http://localhost:3001
     ```
   - Despues de haber instalado las dependencias ejecutar el comando npm start  
-
-#### Tecnologías Utilizadas
-
-- [ ] React
-- [ ] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
-- [ ] Material UI
-- [ ] Styled Components
-- [ ] Axios
