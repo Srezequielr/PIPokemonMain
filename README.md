@@ -46,7 +46,7 @@ https://pi-pokemon-main-pi.vercel.app/
 
 # Notas 🗒️
 
-Si por al algun motivo quiere desplegar la aplicacion de forma local es necesario:
+Para desplegar la aplicacion de forma local es necesario:
 
 - Clonar el repositorio
 - Instalar las dependencias de la carpeta Client y Api 
