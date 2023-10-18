@@ -14,7 +14,7 @@ export default function Detail() {
   const navigate = useNavigate();
 
   //Traigo y fragmento la informacion del pokemon
-  const pokemon = useSelector((state) => state.pokeDetail);
+  const pokemon = useSelector((state) => state.pokeDetail); 
   const { error, data } = pokemon;
   useEffect(() => {
     dispatch(getPokeDetail(id));
