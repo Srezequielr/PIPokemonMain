@@ -17,7 +17,7 @@ export default function Landing(props) {
             </p>
           </div>
         </Grid>
-        <Grid md={6} xs={12} item>
+        <Grid md={6} xs={12} item className={styles.imageContainer}>
           <img className={styles.image} src={pikachu} alt="Pokemon Pikachu" />
         </Grid>
       </Grid>
